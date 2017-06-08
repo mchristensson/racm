@@ -9,15 +9,17 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "WEEKS", uniqueConstraints = @UniqueConstraint(columnNames = { "YEAR", "WEEK" }) )
+@Table(name = "WEEKS", uniqueConstraints = @UniqueConstraint(columnNames = { "weekofyear", "weeknumber" }) )
 public class Week {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "weekofyear",insertable=true, length = 4)
 	private String year;
 
+	@Column(name = "weeknumber", length = 2)
 	private String week;
 
 	public void setYear(String year) {
@@ -28,12 +30,10 @@ public class Week {
 		this.week = week;
 	}
 
-	@Column(name = "YEAR", nullable = false, length = 4)
 	public String getYear() {
 		return year;
 	}
 
-	@Column(name = "WEEK", nullable = false, length = 2)
 	public String getWeek() {
 		return week;
 	}

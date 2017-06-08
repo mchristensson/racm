@@ -7,6 +7,7 @@
 		<class>org.mac.raci.db.model.FunctionalArea</class>
 		<class>org.mac.raci.db.model.Competency</class>
 		<class>org.mac.raci.db.model.Person</class>
+		<class>org.mac.raci.db.model.Week</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
@@ -19,6 +20,8 @@
 			<property name="eclipselink.ddl-generation" value="create-tables" />
 			<property name="eclipselink.ddl-generation.output-mode"
 				value="database" />
+				
+				<property name="hibernate.default_schema" value="app"/>
 		</properties>
 
 	</persistence-unit>

@@ -1,10 +1,12 @@
 package org.mac.raci.db.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +20,10 @@ public class CompetenceLevel {
 	private int level;
 	private boolean certified;
 
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Person assignee;
+
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Competency competency;
 
 	public int getLevel() {
@@ -29,7 +34,7 @@ public class CompetenceLevel {
 		this.level = level;
 	}
 
-	@ManyToOne
+	@OneToOne
 	public Person getAssignee() {
 		return assignee;
 	}
@@ -38,7 +43,7 @@ public class CompetenceLevel {
 		this.assignee = assignee;
 	}
 
-	@ManyToOne
+	@OneToOne
 	public Competency getCompetency() {
 		return competency;
 	}

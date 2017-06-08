@@ -2,18 +2,20 @@ package org.mac.raci.db.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "PERSONS", uniqueConstraints = @UniqueConstraint(columnNames = { "FULLNAME", "EMAILADDRESS" }) )
+@Table(name = "PERSONS", uniqueConstraints = @UniqueConstraint(columnNames = { }) )
 public class Person {
 
 	@Id
@@ -25,9 +27,13 @@ public class Person {
 	private String fullname;
 
 	private String email;
-	@OneToMany
-	private final Collection<CompetenceLevel> competenceLevels = new ArrayList<CompetenceLevel>();
+	
+	@ManyToMany
+	private final List<CompetenceLevel> competenceLevels = new ArrayList<CompetenceLevel>();
 
+	@OneToMany(mappedBy="assignee")
+	private final List<ProjectAllocation> projectAllocations = new ArrayList<ProjectAllocation>();
+	
 	@Column(name = "CITY", nullable = false, length = 128)
 	public String getCity() {
 		return city;
@@ -57,6 +63,15 @@ public class Person {
 	
 	public Collection<CompetenceLevel> getCompetenceLevels() {
 		return competenceLevels;
+	}
+	
+	public Collection<ProjectAllocation> getProjectAllocationss() {
+		return projectAllocations;
+	}
+	
+	
+	public void setId(Long id) {
+	    this.id = id;
 	}
 
 }
